@@ -3,10 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 Future<String?> addNewBudgetDialog(BuildContext context) async {
+  const List<Icon> icons = [Icon(Icons.account_balance_wallet), Icon(Icons.airplane_ticket)];
+
   final TextEditingController budgetNameController = TextEditingController();
 
   // list of all budgets and the participants
-  // final List<String> _participants = [];
   final TextEditingController budgetParticipants = TextEditingController();
 
   // make an api call to add a new budget w/ participants
@@ -31,6 +32,9 @@ Future<String?> addNewBudgetDialog(BuildContext context) async {
             controller: budgetParticipants,
             decoration: const InputDecoration(hintText: 'Budget Name'),
           ),
+          const Text('Choose an Icon'),
+          // DropdownButton<IconData>(
+          //   items: icons.map((icon) => DropdownMenuItem<IconData>(child: icon)).toList(), onChanged: (icon) => log(icon.toString()),),
         ],
       ),
       actions: [
