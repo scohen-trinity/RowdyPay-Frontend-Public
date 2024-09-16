@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 Future<String?> addNewBudgetDialog(BuildContext context) async {
-  const List<Icon> icons = [Icon(Icons.account_balance_wallet), Icon(Icons.airplane_ticket)];
+  // const List<Icon> icons = [Icon(Icons.account_balance_wallet), Icon(Icons.airplane_ticket)];
 
   final TextEditingController budgetNameController = TextEditingController();
 
