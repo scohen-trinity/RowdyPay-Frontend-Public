@@ -1,13 +1,21 @@
 import 'dart:developer';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:receipt_sharing/picture_page.dart';
 
 class BudgetPage extends StatelessWidget {
   final String budgetName;
 
-  const BudgetPage({ super.key, required this.budgetName });
+  final CameraDescription camera;
 
-  // TODO Implement the logic to open the camera (this function probably won't be where it is now)
+  const BudgetPage({ 
+    super.key,
+    required this.budgetName,
+    required this.camera
+  });
+
+  // TODO Implement the logic to open the camera
   void addNewReceipt() {
     log('add new receipt');
   }
@@ -22,7 +30,7 @@ class BudgetPage extends StatelessWidget {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.1,
             child: Container(
-              color: Colors.green,
+              color: Theme.of(context).colorScheme.inversePrimary,
               child: Center(
                 child: Text(
                   budgetName,
@@ -55,12 +63,21 @@ class BudgetPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             FloatingActionButton(
+              heroTag: 'home-button',
               onPressed: () { Navigator.pop(context); },
               child: const Icon(Icons.home),  
             ),
             Expanded(child: Container()),
             FloatingActionButton(
-              onPressed: addNewReceipt,
+              heroTag: 'scan-button',
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return PicturePage(camera: camera);
+                  }),
+                );
+              },
               child: const Icon(Icons.search),
             ),
           ]

@@ -1,14 +1,17 @@
 // import 'dart:developer';
 
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/budget_page.dart';
 
 import 'new_budget_dialog.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title});
+  const HomePage({super.key, required this.title, required this.camera});
 
   final String title;
+
+  final CameraDescription camera;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -38,8 +41,8 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                    return BudgetPage(budgetName: budgets[index]);
-                  })
+                    return BudgetPage(budgetName: budgets[index], camera: widget.camera);
+                  }),
                 );
               },
               trailing: const Icon(Icons.more_vert),
