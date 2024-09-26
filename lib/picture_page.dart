@@ -50,6 +50,7 @@ class PicturePageState extends State<PicturePage> {
           }
         }
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
@@ -71,6 +72,19 @@ class PicturePageState extends State<PicturePage> {
           }
         },
         child: const Icon(Icons.camera_alt),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color:const Color.fromRGBO(82, 170, 94, 1.0),
+        shape: const CircularNotchedRectangle(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.home, color: Color.fromRGBO(254, 43, 43, 1))
+            ),
+          ],
+        ),
       ),
     );
   }
