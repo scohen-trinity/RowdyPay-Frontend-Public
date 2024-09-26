@@ -22,6 +22,9 @@ class _HomePageState extends State<HomePage> {
   final List<String> budgets = ['Balcony Time', '219 Andrews', 'Crack Cardboard'];
 
   // TODO Implement fetch call to get real budgets
+  void fetchBudgets() {
+    
+  }
 
   @override
   Widget build(BuildContext context) {

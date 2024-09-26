@@ -1,52 +1,64 @@
-import 'dart:developer';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/picture_page.dart';
 
-class BudgetPage extends StatelessWidget {
+class BudgetPage extends StatefulWidget {
   final String budgetName;
 
   final CameraDescription camera;
-
+  
   const BudgetPage({ 
     super.key,
     required this.budgetName,
-    required this.camera
+    required this.camera,
   });
 
-  // TODO Implement the logic to open the camera
-  void addNewReceipt() {
-    log('add new receipt');
-  }
+  @override
+  State<BudgetPage> createState() => _BudgetPageState();
+
+}
+
+class _BudgetPageState extends State<BudgetPage> {
+  final List<String> participants = ['Aiden', 'Kyle', 'Sam', 'Sandra'];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(widget.budgetName),
+      ),
       // TODO add participants at the top and a pay total in the middle
       body: Center(
         child: Column(children: <Widget>[
           SizedBox(
             width: double.infinity,
-            height: MediaQuery.of(context).size.height * 0.1,
-            child: Container(
-              color: Theme.of(context).colorScheme.inversePrimary,
-              child: Center(
-                child: Text(
-                  budgetName,
-                  style: const TextStyle(
-                    fontSize: 24,
-                  ),
-                )
-              ),
-            ),
-          ),
-          SizedBox(
-            width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.2,
-            child: Container(
-              color: Theme.of(context).primaryColorDark,
-              child: const Text('This is where you will see participants'),
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: participants.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    width: 70,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.blue[200],
+                    ),
+                    child: Center(
+                      child: Text(
+                        participants[index].substring(0, 1),
+                        style: const TextStyle(
+                          color: Colors.amber,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ),
+                  ),
+                );
+              },
           ),),
           SizedBox(
             width: double.infinity,
@@ -74,7 +86,7 @@ class BudgetPage extends StatelessWidget {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                    return PicturePage(camera: camera);
+                    return PicturePage(camera: widget.camera);
                   }),
                 );
               },
