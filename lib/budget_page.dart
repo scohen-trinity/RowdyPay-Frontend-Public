@@ -21,6 +21,8 @@ class BudgetPage extends StatefulWidget {
 class _BudgetPageState extends State<BudgetPage> {
   final List<String> participants = ['Aiden', 'Kyle', 'Sam', 'Sandra'];
 
+  final String balance = "\$99.99";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,11 +65,17 @@ class _BudgetPageState extends State<BudgetPage> {
           SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.5,
-            child: Container(
-              color: Theme.of(context).primaryColorLight,
-              child: const Text('This is where you will see your balance'),
-          ),),
-        ])
+            child: Center(
+              child: Text(
+                balance,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 60,
+                ),
+              ),
+            ),
+          ),
+        ]),
       ),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(left: 30),
