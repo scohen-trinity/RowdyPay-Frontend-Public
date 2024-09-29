@@ -65,7 +65,9 @@ class _BudgetPageState extends State<BudgetPage> {
           SizedBox(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.5,
-            child: Center(
+            child: CircleAvatar(
+              radius: 30,
+              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
               child: Text(
                 balance,
                 style: const TextStyle(
