@@ -5,11 +5,14 @@ import 'package:receipt_sharing/picture_page.dart';
 class BudgetPage extends StatefulWidget {
   final String budgetName;
 
+  final List<String> participants;
+
   final CameraDescription camera;
   
   const BudgetPage({ 
     super.key,
     required this.budgetName,
+    required this.participants,
     required this.camera,
   });
 
@@ -19,9 +22,7 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  final List<String> participants = ['Aiden', 'Kyle', 'Sam', 'Sandra'];
-
-  final String balance = "\$99.99";
+  final String balance = "\$999.99";
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class _BudgetPageState extends State<BudgetPage> {
             height: MediaQuery.of(context).size.height * 0.2,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: participants.length,
+              itemCount: widget.participants.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -51,9 +52,9 @@ class _BudgetPageState extends State<BudgetPage> {
                     ),
                     child: Center(
                       child: Text(
-                        participants[index].substring(0, 1),
+                        widget.participants[index].substring(0, 1),
                         style: const TextStyle(
-                          color: Colors.amber,
+                          color: Colors.blue,
                           fontWeight: FontWeight.bold,
                         ),
                       )
@@ -67,21 +68,24 @@ class _BudgetPageState extends State<BudgetPage> {
             height: MediaQuery.of(context).size.height * 0.5,
             child: Center(
               child: Container(
-                padding: const EdgeInsets.all(50),
+                width: 200,
+                height: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: Theme.of(context).colorScheme.primary,
-                    width: 3,
+                    width: 1.5,
                   ),
                 ),
-                child: Center(child: Text(
-                  balance,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 60,
+                child: Center(
+                  child: Text(
+                    balance,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 40,
+                    ),
                   ),
-                ),),
+                ),
               ),
             ),
           ),

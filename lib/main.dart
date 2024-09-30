@@ -64,7 +64,7 @@ class _AppState extends State<App> {
       darkTheme: ThemeData(
         useMaterial3: true,
         brightness: Brightness.dark,
-        colorSchemeSeed: const Color(0xff49352A),
+        colorSchemeSeed: const Color(0xff4C3F39),
       ),
       themeMode: ThemeMode.dark,
       home: HomePage(title: 'Your Budgets', camera: widget.camera),
