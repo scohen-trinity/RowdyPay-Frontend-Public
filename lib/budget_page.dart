@@ -8,11 +8,14 @@ class BudgetPage extends StatefulWidget {
   final List<String> participants;
 
   final CameraDescription camera;
+
+  final double balance;
   
   const BudgetPage({ 
     super.key,
     required this.budgetName,
     required this.participants,
+    required this.balance,
     required this.camera,
   });
 
@@ -22,8 +25,6 @@ class BudgetPage extends StatefulWidget {
 }
 
 class _BudgetPageState extends State<BudgetPage> {
-  final String balance = "\$999.99";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,12 +75,12 @@ class _BudgetPageState extends State<BudgetPage> {
                   shape: BoxShape.circle,
                   border: Border.all(
                     color: Theme.of(context).colorScheme.primary,
-                    width: 1.5,
+                    width: 1,
                   ),
                 ),
                 child: Center(
                   child: Text(
-                    balance,
+                    '\$${widget.balance}',
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 40,

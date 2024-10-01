@@ -10,8 +10,9 @@ class Budget {
   final int id;
   final String name;
   final List<String> participants;
+  final double balance;
 
-  Budget({required this.id, required this.name, required this.participants});
+  Budget({required this.id, required this.name, required this.participants, required this.balance});
 
   // TODO check the factory annotation here for JSON parsing
   factory Budget.fromJson(Map<String, dynamic> json) {
@@ -19,6 +20,7 @@ class Budget {
       id: json['id'],
       name: json['name'],
       participants: json['participants'],
+      balance: json['balance'],
     );
   }
 }
@@ -37,14 +39,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // list of all budgets and the controller for the text field
   final List<Budget> budgets = [
-    Budget(id: 1, name: 'Balcony Time', participants: ['Sam', 'Aiden', 'Sandra', 'Kyle']),
-    Budget(id: 2, name: '219 Andrews', participants: ['Sam', 'Jax', 'Nate', 'Levi']),
-    Budget(id: 3, name: 'Crack Cardboard', participants: ['Sam', 'Nate', 'Kyle', 'Sandra']),
+    Budget(id: 1, name: 'Balcony Time', participants: ['Sam', 'Aiden', 'Sandra', 'Kyle'], balance: 0.00),
+    Budget(id: 2, name: '219 Andrews', participants: ['Sam', 'Jax', 'Nate', 'Levi'], balance: 999.99),
+    Budget(id: 3, name: 'Crack Cardboard', participants: ['Sam', 'Nate', 'Kyle', 'Sandra'], balance: 25.00),
   ];
 
   // TODO Implement fetch call to get real budgets
   void fetchBudgets() {
     
+  }
+
+  // make an api call to add a new budget w/ participants
+  void addNewBudget(String name, String participants) {
+    setState(() {
+      budgets.add(Budget(id: budgets.length, name: name, participants: [], balance: 0));
+    });
   }
 
   @override
@@ -65,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (BuildContext context) {
-                    return BudgetPage(budgetName: budgets[index].name, participants: budgets[index].participants, camera: widget.camera);
+                    return BudgetPage(budgetName: budgets[index].name, participants: budgets[index].participants, camera: widget.camera, balance: budgets[index].balance);
                   }),
                 );
               },
@@ -80,7 +89,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          addNewBudgetDialog(context);
+          addNewBudgetDialog(context, addNewBudget);
         },
         tooltip: 'Add a new shared budget',
         child: const Icon(Icons.add),

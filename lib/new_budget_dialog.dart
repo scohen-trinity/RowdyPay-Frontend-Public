@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/icon_dropdown.dart';
 
-Future<String?> addNewBudgetDialog(BuildContext context) async {
+Future<void> addNewBudgetDialog(BuildContext context, Function(String, String) onAddBudget) async {
   final TextEditingController budgetNameController = TextEditingController();
 
   // list of all budgets and the participants
@@ -11,10 +11,11 @@ Future<String?> addNewBudgetDialog(BuildContext context) async {
 
   // make an api call to add a new budget w/ participants
   void addNewBudget() {
+    onAddBudget(budgetNameController.text, budgetParticipants.text);
     log(budgetNameController.text + budgetParticipants.text);
   }
 
-  return showDialog(
+  return showDialog<void>(
     context: context,
     builder: (context) => AlertDialog(
       title: const Text('New Budget Form'),
@@ -32,7 +33,7 @@ Future<String?> addNewBudgetDialog(BuildContext context) async {
             decoration: const InputDecoration(hintText: 'Budget Name'),
           ),
           const Text('Choose an Icon'),
-          IconDropdown(),
+          const IconDropdown(),
         ],
       ),
       actions: [
