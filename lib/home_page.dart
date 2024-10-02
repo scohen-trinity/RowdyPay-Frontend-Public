@@ -50,9 +50,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   // make an api call to add a new budget w/ participants
-  void addNewBudget(String name, String participants) {
+  void addNewBudget(String name, List<String> participants) {
     setState(() {
-      budgets.add(Budget(id: budgets.length, name: name, participants: [], balance: 0));
+      budgets.add(Budget(id: budgets.length, name: name, participants: participants, balance: 0));
     });
   }
 
