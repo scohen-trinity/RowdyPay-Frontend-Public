@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
 enum IconLabel {
-  wallet('Wallet', Icons.wallet),
-  airplane('Airplane', Icons.airplane_ticket),
-  favorite('Heart', Icons.favorite);
+  wallet('Wallet', Icon(Icons.wallet)),
+  airplane('Airplane', Icon(Icons.airplane_ticket)),
+  favorite('Heart', Icon(Icons.favorite));
 
   const IconLabel(this.label, this.icon);
   final String label;
-  final IconData icon;
+  final Icon icon;
 }
 
 class IconDropdown extends StatefulWidget {
-  const IconDropdown({super.key});
+  Function(Icon)? setIcon;
+
+  IconDropdown({super.key, this.setIcon});
 
   @override
   _IcondDropdownState createState() => _IcondDropdownState();
@@ -30,7 +32,6 @@ class _IcondDropdownState extends State<IconDropdown> {
       controller: iconController,
       enableFilter: true,
       requestFocusOnTap: true,
-      // leadingIcon: const Icon(Icons.search),
       label: const Text('Icon'),
       inputDecorationTheme: const InputDecorationTheme(
         filled: true,
@@ -39,6 +40,7 @@ class _IcondDropdownState extends State<IconDropdown> {
       onSelected: (IconLabel? icon) {
         setState(() {
           selectedIcon = icon;
+          widget.setIcon?.call(selectedIcon!.icon);
         });
       },
       dropdownMenuEntries: IconLabel.values.map<DropdownMenuEntry<IconLabel>>(
@@ -46,7 +48,7 @@ class _IcondDropdownState extends State<IconDropdown> {
           return DropdownMenuEntry<IconLabel>(
             value: icon,
             label: icon.label,
-            leadingIcon: Icon(icon.icon),
+            leadingIcon: icon.icon,
           );
         },
       ).toList(),
