@@ -3,8 +3,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/budget_page.dart';
+import 'package:receipt_sharing/new_budget_modal.dart';
 
-import 'new_budget_dialog.dart';
+// import 'new_budget_dialog.dart';
 
 class Budget {
   final int id;
@@ -91,7 +92,9 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          addNewBudgetDialog(context, addNewBudget);
+          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+            return const NewBudgetModal();
+          }));
         },
         tooltip: 'Add a new shared budget',
         child: const Icon(Icons.add),
