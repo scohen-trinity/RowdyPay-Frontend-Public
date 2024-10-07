@@ -29,9 +29,26 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
               controller: nameController,
               decoration: const InputDecoration(hintText: 'Budget Name'),
             ),
-            TextField(
-              controller: participantController,
-              decoration: const InputDecoration(hintText: 'Add a participant'),
+            Row(
+              children: [
+                Expanded(child: TextField(
+                  controller: participantController,
+                  decoration: const InputDecoration(hintText: 'Add a participant'),
+                ),),
+                SizedBox(
+                  width: 50,
+                  height: 30,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero
+                    ),
+                    onPressed: () {
+                      participantsToAdd.add(participantController.text);
+                      participantController.text = "";
+                    },
+                    child: const Icon(Icons.add)),
+                ),
+              ],
             ),
           ],
         ),
