@@ -28,48 +28,72 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(hintText: 'Budget Name'),
-            ),
-            Row(
-              children: [
-                Expanded(child: TextField(
-                  controller: participantController,
-                  decoration: const InputDecoration(hintText: 'Add a participant'),
-                ),),
-                SizedBox(
-                  width: 50,
-                  height: 30,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              TextField(
+                controller: nameController,
+                decoration: InputDecoration(
+                  hintText: 'Budget Name',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                    borderSide: BorderSide(
+                      color: Theme.of(context).colorScheme.inversePrimary,
+                      width: 1.0,
                     ),
-                    onPressed: () {
-                      participantsToAdd.add(participantController.text);
-                      participantController.text = "";
-                    },
-                    child: const Icon(Icons.add),
                   ),
-                ),
-              ],
-            ),
-            IconDropdown(setIcon: setCurrentIcon),
-            Row(
-              children: [
-                ElevatedButton(
-                  onPressed: () { addNewBudget(nameController.text, participantsToAdd, currentIcon); },
-                  child: const Text('CREATE'),
-                ),
-                ElevatedButton(
-                  onPressed: () {Navigator.pop(context); },
-                  child: const Text('CANCEL')
-                ),
-              ],
-            ),
-          ],
+                  ),
+              ),
+              Row(
+                children: [
+                  Expanded(child: TextField(
+                    controller: participantController,
+                    decoration: InputDecoration(
+                      hintText: 'Add a participant',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(40.0),
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.inversePrimary,
+                          width: 1.0,
+                        ),
+                      ),
+                    ),
+                  ),),
+                  SizedBox(
+                    width: 50,
+                    height: 30,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.zero
+                      ),
+                      onPressed: () {
+                        participantsToAdd.add(participantController.text);
+                        participantController.text = "";
+                      },
+                      child: const Icon(Icons.add),
+                    ),
+                  ),
+                ],
+              ),
+              IconDropdown(setIcon: setCurrentIcon),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () { 
+                      addNewBudget(nameController.text, participantsToAdd, currentIcon);
+                      Navigator.pop(context);
+                    },
+                    child: const Text('CREATE'),
+                  ),
+                  ElevatedButton(
+                    onPressed: () { Navigator.pop(context); },
+                    child: const Text('CANCEL')
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

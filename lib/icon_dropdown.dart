@@ -11,8 +11,8 @@ enum IconLabel {
 }
 
 class IconDropdown extends StatefulWidget {
-  Function(Icon)? setIcon;
-  IconDropdown({super.key, this.setIcon});
+  final Function(Icon)? setIcon;
+  const IconDropdown({super.key, this.setIcon});
 
   @override
   _IcondDropdownState createState() => _IcondDropdownState();

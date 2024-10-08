@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:receipt_sharing/budget_page.dart';
 import 'package:receipt_sharing/new_budget_modal.dart';
 
-// import 'new_budget_dialog.dart';
-
 class Budget {
   final int id;
   final String name;
@@ -41,11 +39,11 @@ class _HomePageState extends State<HomePage> {
   // list of all budgets and the controller for the text field
   final List<Budget> budgets = [
     Budget(id: 1, name: 'Balcony Time', participants: ['Sam', 'Aiden', 'Sandra', 'Kyle'], balance: 0.00, icon: const Icon(Icons.favorite)),
-    Budget(id: 2, name: '219 Andrews', participants: ['Sam', 'Jax', 'Nate', 'Levi'], balance: 999.99, icon: const Icon(Icons.favorite)),
+    Budget(id: 2, name: '219 Andrews', participants: ['Sam', 'Jax', 'Nate', 'Levi'], balance: 999.99, icon: const Icon(Icons.wallet)),
     Budget(id: 3, name: 'Crack Cardboard', participants: ['Sam', 'Nate', 'Kyle', 'Sandra'], balance: 25.00, icon: const Icon(Icons.favorite)),
   ];
 
-  // TODO Implement fetch call to get real budgets
+  // TODO Implement API call to backend to fetch budgets
   void fetchBudgets() {
     
   }

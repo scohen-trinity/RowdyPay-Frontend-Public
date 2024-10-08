@@ -40,6 +40,10 @@ class PicturePageState extends State<PicturePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Text('Receipt Pic'),
+      ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
         builder: (context, snapshot) {
@@ -50,7 +54,7 @@ class PicturePageState extends State<PicturePage> {
           }
         }
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           try {
@@ -72,19 +76,6 @@ class PicturePageState extends State<PicturePage> {
           }
         },
         child: const Icon(Icons.camera_alt),
-      ),
-      bottomNavigationBar: BottomAppBar(
-        color:const Color.fromRGBO(82, 170, 94, 1.0),
-        shape: const CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.home, color: Color.fromRGBO(254, 43, 43, 1))
-            ),
-          ],
-        ),
       ),
     );
   }
