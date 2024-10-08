@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:receipt_sharing/icon_dropdown.dart';
 
 class NewBudgetModal extends StatefulWidget {
   final Function(String, List<String>, Icon) addNewBudget;
@@ -13,9 +14,14 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController participantController = TextEditingController();
   final List<String> participantsToAdd = [];
+  Icon currentIcon = const Icon(Icons.favorite);
 
   void addNewBudget(String name, List<String> participants, Icon icon) {
     widget.addNewBudget(name, participants, icon);
+  }
+
+  void setCurrentIcon(Icon icon) {
+    currentIcon = icon;
   }
 
   @override
@@ -50,10 +56,11 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
                 ),
               ],
             ),
+            IconDropdown(setIcon: setCurrentIcon),
             Row(
               children: [
                 ElevatedButton(
-                  onPressed: () { addNewBudget(nameController.text, participantsToAdd, const Icon(Icons.wallet)); },
+                  onPressed: () { addNewBudget(nameController.text, participantsToAdd, currentIcon); },
                   child: const Text('CREATE'),
                 ),
                 ElevatedButton(
