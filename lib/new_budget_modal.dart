@@ -1,13 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class NewBudgetModal extends StatefulWidget {
-  const NewBudgetModal({super.key});
+  final Function(String, List<String>, Icon) addNewBudget;
 
-  void addNewBudget() {
-    log('triggered');
-  }
+  const NewBudgetModal({super.key, required this.addNewBudget});
 
   @override
   State<NewBudgetModal> createState() => _NewBudgetModalState();
@@ -18,6 +14,9 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
   final TextEditingController participantController = TextEditingController();
   final List<String> participantsToAdd = [];
 
+  void addNewBudget(String name, List<String> participants, Icon icon) {
+    widget.addNewBudget(name, participants, icon);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,20 @@ class _NewBudgetModalState extends State<NewBudgetModal> {
                       participantsToAdd.add(participantController.text);
                       participantController.text = "";
                     },
-                    child: const Icon(Icons.add)),
+                    child: const Icon(Icons.add),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () { addNewBudget(nameController.text, participantsToAdd, const Icon(Icons.wallet)); },
+                  child: const Text('CREATE'),
+                ),
+                ElevatedButton(
+                  onPressed: () {Navigator.pop(context); },
+                  child: const Text('CANCEL')
                 ),
               ],
             ),
