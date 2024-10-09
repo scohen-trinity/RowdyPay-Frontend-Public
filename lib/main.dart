@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 // import 'package:path_provider/path_provider.dart';
 
-import 'home_page.dart';
+import 'pages/home_page.dart';
 
 late List<CameraDescription> cameras;
 

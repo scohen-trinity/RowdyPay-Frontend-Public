@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/icon_dropdown.dart';
 
-class NewBudgetModal extends StatefulWidget {
+class NewBudgetPage extends StatefulWidget {
   final Function(String, List<String>, Icon) addNewBudget;
 
-  const NewBudgetModal({super.key, required this.addNewBudget});
+  const NewBudgetPage({super.key, required this.addNewBudget});
 
   @override
-  State<NewBudgetModal> createState() => _NewBudgetModalState();
+  State<NewBudgetPage> createState() => _NewBudgetPageState();
 }
 
-class _NewBudgetModalState extends State<NewBudgetModal> {
+class _NewBudgetPageState extends State<NewBudgetPage> {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController participantController = TextEditingController();
   final List<String> participantsToAdd = [];

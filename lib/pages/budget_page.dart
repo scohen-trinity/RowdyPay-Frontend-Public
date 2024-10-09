@@ -1,6 +1,6 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:receipt_sharing/picture_page.dart';
+import 'package:receipt_sharing/pages/picture_page.dart';
 
 class BudgetPage extends StatefulWidget {
   final String budgetName;
