@@ -66,9 +66,9 @@ class _IcondDropdownState extends State<IconDropdown> {
     return Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            selectedIcon != null ? Icon(selectedIcon, size: 100) : Text('No icon selected'),
+            selectedIcon != null ? Icon(selectedIcon, size: 100) : const Text('No icon selected'),
             const SizedBox(height: 20),
-            ElevatedButton(onPressed: _openIconGrid, child: Text('Select an icon'),
+            ElevatedButton(onPressed: _openIconGrid, child: const Text('Select an icon'),
             ),
           ],
         );
