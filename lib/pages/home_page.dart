@@ -1,28 +1,9 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:receipt_sharing/models/budget_model.dart';
 import 'package:receipt_sharing/pages/budget_page.dart';
 import 'package:receipt_sharing/pages/new_budget_page.dart';
-
-class Budget {
-  final int id;
-  final String name;
-  final List<String> participants;
-  final double balance;
-  final Icon icon;
-
-  Budget({required this.id, required this.name, required this.participants, required this.balance, required this.icon});
-
-  // TODO check the factory annotation here for JSON parsing
-  factory Budget.fromJson(Map<String, dynamic> json) {
-    return Budget(
-      id: json['id'],
-      name: json['name'],
-      participants: json['participants'],
-      balance: json['balance'],
-      icon: json['icon'],
-    );
-  }
-}
+import 'package:receipt_sharing/services/budget_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title, required this.camera});
@@ -37,21 +18,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   // list of all budgets and the controller for the text field
-  final List<Budget> budgets = [
-    Budget(id: 1, name: 'Balcony Time', participants: ['Sam', 'Aiden', 'Sandra', 'Kyle'], balance: 0.00, icon: const Icon(Icons.favorite)),
-    Budget(id: 2, name: '219 Andrews', participants: ['Sam', 'Jax', 'Nate', 'Levi'], balance: 999.99, icon: const Icon(Icons.wallet)),
-    Budget(id: 3, name: 'Crack Cardboard', participants: ['Sam', 'Nate', 'Kyle', 'Sandra'], balance: 25.00, icon: const Icon(Icons.favorite)),
-  ];
+  late Future<List<Budget>> futureBudgets;
 
-  // TODO Implement API call to backend to fetch budgets
-  void fetchBudgets() {
-    
+  void initState() {
+    super.initState();
+    futureBudgets = BudgetService().getBudget();
   }
 
   // make an api call to add a new budget w/ participants
   void addNewBudget(String name, List<String> participants, Icon icon) {
     setState(() {
-      budgets.add(Budget(id: budgets.length, name: name, participants: participants, balance: 0, icon: icon));
+      // budgets.add(Budget(id: budgets.length, name: name, participants: participants, balance: 0, icon: icon));
     });
   }
 
@@ -62,25 +39,40 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: Center(
-        child: ListView.builder(
-          itemCount: budgets.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-              leading: budgets[index].icon,
-              title: Text(budgets[index].name),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return BudgetPage(budgetName: budgets[index].name, participants: budgets[index].participants, camera: widget.camera, balance: budgets[index].balance);
-                  }),
-                );
-              },
-              trailing: const Icon(Icons.more_vert),
-            );
+      body: FutureBuilder<List<Budget>>(
+        future: futureBudgets,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return const Center(child: Text('No Budgets :('));
           }
-        ),
+
+          final budgets = snapshot.data!;
+
+          return Center(
+            child: ListView.builder(
+              itemCount: budgets.length,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: Icon(budgets[index].icon),
+                  title: Text(budgets[index].name),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return BudgetPage(budgetName: budgets[index].name, participants: budgets[index].participants, camera: widget.camera, balance: budgets[index].balance);
+                      }),
+                    );
+                  },
+                  trailing: const Icon(Icons.more_vert),
+                );
+              }
+            ),
+          );
+        },
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
