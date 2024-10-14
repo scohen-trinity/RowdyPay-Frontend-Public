@@ -1,15 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum IconLabel {
-  wallet('Wallet', Icon(Icons.wallet)),
-  airplane('Airplane', Icon(Icons.airplane_ticket)),
-  favorite('Heart', Icon(Icons.favorite));
-
-  const IconLabel(this.label, this.icon);
-  final String label;
-  final Icon icon;
-}
-
 class IconDropdown extends StatefulWidget {
   final Function(Icon)? setIcon;
   const IconDropdown({super.key, this.setIcon});
@@ -27,6 +17,7 @@ class _IcondDropdownState extends State<IconDropdown> {
     Icons.person,
     Icons.map,
     Icons.camera_alt,
+    Icons.all_inclusive,
     ];
 
   final TextEditingController iconController = TextEditingController();

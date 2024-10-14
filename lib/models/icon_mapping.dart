@@ -16,6 +16,8 @@ IconData iconFromString(String name) {
       return Icons.camera_alt;
     case 'wallet':
       return Icons.wallet;
+    case 'all_inclusive':
+      return Icons.all_inclusive;
     default:
       return Icons.help_outline;
   }

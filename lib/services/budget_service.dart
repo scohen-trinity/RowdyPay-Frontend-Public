@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:receipt_sharing/models/budget_model.dart';
 class BudgetService {
-  static const String _apiUrl = 'http://localhost:3000';
+  static const String _apiUrl = 'http://localhost:3000/api';
 
   Future<List<Budget>> getBudgets() async {
     try {
