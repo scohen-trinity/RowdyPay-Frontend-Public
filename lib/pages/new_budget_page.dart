@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:receipt_sharing/icon_dropdown.dart';
+import 'package:receipt_sharing/widgets/icon_dropdown.dart';
 
 class NewBudgetPage extends StatefulWidget {
   final Function(String, List<String>, Icon) addNewBudget;

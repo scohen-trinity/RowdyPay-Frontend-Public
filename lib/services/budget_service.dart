@@ -6,7 +6,7 @@ import 'package:receipt_sharing/models/budget_model.dart';
 class BudgetService {
   static const String _apiUrl = 'http://localhost:3000';
 
-  Future<List<Budget>> getBudget() async {
+  Future<List<Budget>> getBudgets() async {
     try {
       final response = await http.get(Uri.parse('$_apiUrl/getBudgets'));
       List<Budget> budgets = [];

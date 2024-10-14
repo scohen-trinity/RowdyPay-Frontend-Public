@@ -16,7 +16,6 @@ class Budget {
     required this.icon,
   });
 
-  // TODO check the factory annotation here for JSON parsing
   factory Budget.fromJson(Map<String, dynamic> json) {
     return Budget(
       id: json['id'],

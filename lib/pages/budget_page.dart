@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/pages/picture_page.dart';
+import 'package:receipt_sharing/widgets/rotating_dashed.dart';
 
 class BudgetPage extends StatefulWidget {
   final String budgetName;
@@ -32,7 +33,6 @@ class _BudgetPageState extends State<BudgetPage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.budgetName),
       ),
-      // TODO add participants at the top and a pay total in the middle
       body: Center(
         child: Column(children: <Widget>[
           SizedBox(
@@ -68,22 +68,24 @@ class _BudgetPageState extends State<BudgetPage> {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * 0.5,
             child: Center(
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Theme.of(context).colorScheme.primary,
-                    width: 1,
+              child: RotatingDashedCircle(
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: Theme.of(context).colorScheme.primary,
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Text(
-                    '\$${widget.balance}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 40,
+                  child: Center(
+                    child: Text(
+                      '\$${widget.balance}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                      ),
                     ),
                   ),
                 ),

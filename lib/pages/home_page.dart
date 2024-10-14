@@ -20,9 +20,10 @@ class _HomePageState extends State<HomePage> {
   // list of all budgets and the controller for the text field
   late Future<List<Budget>> futureBudgets;
 
+  @override
   void initState() {
     super.initState();
-    futureBudgets = BudgetService().getBudget();
+    futureBudgets = BudgetService().getBudgets();
   }
 
   // make an api call to add a new budget w/ participants
