@@ -16,6 +16,16 @@ class Budget {
     required this.icon,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'participants': participants,
+      'balance': balance,
+      'icon': icon.toString(),
+    };
+  }
+
   factory Budget.fromJson(Map<String, dynamic> json) {
     return Budget(
       id: json['id'],

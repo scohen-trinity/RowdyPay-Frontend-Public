@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class IconDropdown extends StatefulWidget {
-  final Function(Icon)? setIcon;
+  final Function(IconData)? setIcon;
   const IconDropdown({super.key, this.setIcon});
 
   @override
@@ -10,15 +10,11 @@ class IconDropdown extends StatefulWidget {
 
 class _IcondDropdownState extends State<IconDropdown> {
   final List<IconData> icons = [
-    Icons.account_balance_wallet,
-    Icons.airplane_ticket,
-    Icons.favorite,
-    Icons.home,
-    Icons.person,
-    Icons.map,
-    Icons.camera_alt,
-    Icons.all_inclusive,
-    ];
+    Icons.wallet, Icons.airplane_ticket, Icons.favorite, Icons.home,
+    Icons.person, Icons.map, Icons.camera_alt, Icons.all_inclusive,
+    Icons.anchor, Icons.assignment, Icons.attach_file, Icons.attach_money,
+    Icons.audiotrack_sharp, Icons.auto_awesome, Icons.bakery_dining, Icons.beach_access,
+  ];
 
   final TextEditingController iconController = TextEditingController();
 
@@ -40,15 +36,16 @@ class _IcondDropdownState extends State<IconDropdown> {
                   onPressed: () {
                     setState(() {
                       selectedIcon = icons[index];
-                      widget.setIcon?.call(Icon(selectedIcon));
+                      widget.setIcon?.call(selectedIcon!);
                     });
                     Navigator.pop(context);
                   },
                 );
-            }),
+              },
+            ),
           ),
         );
-      }
+      },
     );
   }
 
