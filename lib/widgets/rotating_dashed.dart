@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 class RotatingDashedCircle extends StatefulWidget {
   final Widget child;
 
-  const RotatingDashedCircle({Key? key, required this.child}) : super(key: key);
+  const RotatingDashedCircle({ super.key, required this.child });
 
   @override
-  _RotatingDashedCircleState createState() => _RotatingDashedCircleState();
+  State<RotatingDashedCircle> createState() => _RotatingDashedCircleState();
 }
 
 class _RotatingDashedCircleState extends State<RotatingDashedCircle> with SingleTickerProviderStateMixin {
@@ -45,7 +45,7 @@ class _RotatingDashedCircleState extends State<RotatingDashedCircle> with Single
                 child: DashedCircle(
                   color: Theme.of(context).colorScheme.primary,
                   dashes: 18,
-                  child: const Padding(padding: const EdgeInsets.all(15.0),
+                  child: const Padding(padding: EdgeInsets.all(15.0),
                     child: CircleAvatar(
                     radius: 100.0,
                     ),

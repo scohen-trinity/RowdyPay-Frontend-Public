@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:receipt_sharing/models/budget_model.dart';
 import 'package:receipt_sharing/services/budget_service.dart';
 import 'package:receipt_sharing/widgets/icon_dropdown.dart';
 
@@ -19,14 +18,7 @@ class _NewBudgetPageState extends State<NewBudgetPage> {
   IconData currentIcon = Icons.favorite;
 
   void addNewBudget(String name, List<String> participants, IconData icon) {
-    Budget newBudget = Budget(
-      id: 10,
-      name: name,
-      participants: participants,
-      balance: 0,
-      icon: icon,
-    );
-    BudgetService().addBudget(newBudget);
+    BudgetService().addBudget(name, participants, icon);
   }
 
   void setCurrentIcon(IconData icon) {

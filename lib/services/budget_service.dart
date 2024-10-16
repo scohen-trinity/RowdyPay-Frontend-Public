@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:receipt_sharing/models/budget_model.dart';
 class BudgetService {
@@ -25,14 +26,20 @@ class BudgetService {
     }
   }
 
-  Future<void> addBudget(Budget budget) async {
+  Future<void> addBudget(String name, List<String> participants, IconData icon) async {
+    BudgetDTO payload = BudgetDTO(
+      name: name,
+      participants: participants,
+      icon: icon.codePoint
+    );
+
     try {
       final response = await http.post(
         Uri.parse('$_apiUrl/addBudget'),
         headers: {
           'Content-Type': 'application/json',
         },
-        body: jsonEncode(budget.toJson()),
+        body: jsonEncode(payload.toJson()),
       );
 
       if (response.statusCode == 200) {

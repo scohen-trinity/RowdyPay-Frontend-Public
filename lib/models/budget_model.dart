@@ -36,3 +36,19 @@ class Budget {
     );
   }
 }
+
+class BudgetDTO {
+  String name;
+  List<String> participants;
+  int icon;
+
+  BudgetDTO({ required this.name, required this.participants, required this.icon });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "name": name,
+      "participants": participants,
+      "icon": icon,
+    };
+  }
+}
