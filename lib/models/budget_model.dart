@@ -32,7 +32,7 @@ class Budget {
       name: json['name'],
       participants: List<String>.from(json['participants']),
       balance: json['balance'],
-      icon: iconFromString(json['icon']),
+      icon: iconFromCodepoint(json['icon']),
     );
   }
 }
