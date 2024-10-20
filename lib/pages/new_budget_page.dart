@@ -3,9 +3,8 @@ import 'package:receipt_sharing/services/budget_service.dart';
 import 'package:receipt_sharing/widgets/icon_dropdown.dart';
 
 class NewBudgetPage extends StatefulWidget {
-  final Function(String, List<String>, Icon) addNewBudget;
 
-  const NewBudgetPage({super.key, required this.addNewBudget});
+  const NewBudgetPage({super.key});
 
   @override
   State<NewBudgetPage> createState() => _NewBudgetPageState();

@@ -27,13 +27,6 @@ class _HomePageState extends State<HomePage> {
     _budgetSvc.getBudgets();
   }
 
-  // make an api call to add a new budget w/ participants
-  void addNewBudget(String name, List<String> participants, Icon icon) {
-    setState(() {
-      // budgets.add(Budget(id: budgets.length, name: name, participants: participants, balance: 0, icon: icon));
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +67,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-            return NewBudgetPage(addNewBudget: addNewBudget);
+            return const NewBudgetPage();
           }));
         },
         tooltip: 'Add a new shared budget',
