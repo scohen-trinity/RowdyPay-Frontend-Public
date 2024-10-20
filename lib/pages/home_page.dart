@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/models/budget_model.dart';
@@ -17,13 +19,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // list of all budgets and the controller for the text field
-  late Future<List<Budget>> futureBudgets;
+  final BudgetService _budgetSvc = BudgetService();
 
   @override
   void initState() {
     super.initState();
-    futureBudgets = BudgetService().getBudgets();
+    _budgetSvc.getBudgets();
   }
 
   // make an api call to add a new budget w/ participants
@@ -40,31 +41,22 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: FutureBuilder<List<Budget>>(
-        future: futureBudgets,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No Budgets :('));
-          }
-
-          final budgets = snapshot.data!;
-
-          return Center(
+      body: ValueListenableBuilder<List<Budget>>(
+            valueListenable: _budgetSvc.budgets,
+            builder: (context, budgetList, _) {
+            log("Triggered");
+            return Center(
             child: ListView.builder(
-              itemCount: budgets.length,
+              itemCount: budgetList.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  leading: Icon(budgets[index].icon),
-                  title: Text(budgets[index].name),
+                  leading: Icon(budgetList[index].icon),
+                  title: Text(budgetList[index].name),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                        return BudgetPage(budgetName: budgets[index].name, participants: budgets[index].participants, camera: widget.camera, balance: budgets[index].balance);
+                        return BudgetPage(budgetName: budgetList[index].name, participants: budgetList[index].participants, camera: widget.camera, balance: budgetList[index].balance);
                       }),
                     );
                   },
@@ -73,7 +65,7 @@ class _HomePageState extends State<HomePage> {
               }
             ),
           );
-        },
+        }
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),

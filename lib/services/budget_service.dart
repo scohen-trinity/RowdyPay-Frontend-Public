@@ -6,21 +6,26 @@ import 'package:http/http.dart' as http;
 import 'package:receipt_sharing/models/budget_model.dart';
 class BudgetService {
   static const String _apiUrl = 'http://localhost:3000/api';
+  
+  static final BudgetService _instance = BudgetService._internal();
+  factory BudgetService() => _instance;
+  BudgetService._internal();
 
-  Future<List<Budget>> getBudgets() async {
+  ValueNotifier<List<Budget>> budgets = ValueNotifier<List<Budget>>([]);
+
+  
+
+  Future<void> getBudgets() async {
     try {
       final response = await http.get(Uri.parse('$_apiUrl/getBudgets'));
-      List<Budget> budgets = [];
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
-        budgets = jsonResponse.map((data) => Budget.fromJson(data)).toList();
-        log(jsonResponse.toString());
+        budgets.value = jsonResponse.map((data) => Budget.fromJson(data)).toList();
       } else {
         log("Error fetching budgets");
         // TODO implement better error handling here
       }
-      return budgets;
     } catch (e) {
       throw Exception('Failed to load budgets: $e');
     }
@@ -43,7 +48,12 @@ class BudgetService {
       );
 
       if (response.statusCode == 200) {
-        log('Great success! ${response.body}');
+        Budget budget = Budget.fromJson(jsonDecode(response.body));
+        // Budget budget = Budget(id: 10, name: "Test", participants: [], balance: 0, icon: Icons.favorite);
+        budgets.value = [...budgets.value, budget];
+        log('Append this budget: ${budget.name}, Current length: ${budgets.value.length}');
+
+        // log(response.body);
       } else {
         log("Error adding to budgets");
       }
