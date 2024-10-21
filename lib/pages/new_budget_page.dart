@@ -43,7 +43,7 @@ class _NewBudgetPageState extends State<NewBudgetPage> {
                       width: 1.0,
                     ),
                   ),
-                  ),
+                ),
               ),
               Row(
                 children: [

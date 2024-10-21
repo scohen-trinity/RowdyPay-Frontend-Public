@@ -52,39 +52,13 @@ class _IcondDropdownState extends State<IconDropdown> {
   @override
   Widget build(BuildContext context) {
     return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            selectedIcon != null ? Icon(selectedIcon, size: 100) : const Text('No icon selected'),
-            const SizedBox(height: 20),
-            ElevatedButton(onPressed: _openIconGrid, child: const Text('Select an icon'),
-            ),
-          ],
-        );
-    // return DropdownMenu<IconLabel>(
-    //   controller: iconController,
-    //   enableFilter: true,
-    //   requestFocusOnTap: true,
-    //   label: const Text('Icon'),
-    //   inputDecorationTheme: const InputDecorationTheme(
-    //     filled: true,
-    //     contentPadding: EdgeInsets.symmetric(vertical: 5.0),
-    //   ),
-    //   onSelected: (IconLabel? icon) {
-    //     setState(() {
-    //       selectedIcon = icon;
-    //       widget.setIcon?.call(selectedIcon!.icon);
-    //     });
-    //   },
-    //   dropdownMenuEntries: IconLabel.values.map<DropdownMenuEntry<IconLabel>>(
-    //     (IconLabel icon) {
-    //       return DropdownMenuEntry<IconLabel>(
-    //         value: icon,
-    //         label: icon.label,
-    //         leadingIcon: icon.icon,
-    //       );
-    //     },
-    //   ).toList(),
-    // );
-  // }
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        selectedIcon != null ? Icon(selectedIcon, size: 100) : const Text('No icon selected'),
+        const SizedBox(height: 20),
+        ElevatedButton(onPressed: _openIconGrid, child: const Text('Select an icon'),
+        ),
+      ],
+    );
   }
 }

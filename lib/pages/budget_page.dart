@@ -1,6 +1,7 @@
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/pages/picture_page.dart';
+import 'package:receipt_sharing/widgets/add_manually_modal.dart';
 import 'package:receipt_sharing/widgets/rotating_dashed.dart';
 
 class BudgetPage extends StatefulWidget {
@@ -104,6 +105,7 @@ class _BudgetPageState extends State<BudgetPage> {
               onPressed: () { Navigator.pop(context); },
               child: const Icon(Icons.home),  
             ),
+            AddManuallyModal(),
             Expanded(child: Container()),
             FloatingActionButton(
               heroTag: 'scan-button',
