@@ -52,3 +52,17 @@ class BudgetDTO {
     };
   }
 }
+
+class QuickAddDTO {
+  int id;
+  double amt;
+
+  QuickAddDTO({ required this.id, required this.amt });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "amt": amt,
+    };
+  }
+}

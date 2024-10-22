@@ -55,4 +55,29 @@ class BudgetService {
       throw Exception('Failed to connect to budgets: $e');
     }
   }
+
+  Future<void> quickAddExpense(int id, double amt) async {
+    QuickAddDTO payload = QuickAddDTO(
+      id: id,
+      amt: amt,
+    );
+
+    try {
+      final response = await http.post(
+        Uri.parse('$_apiUrl/quickAddAmount'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode(payload.toJson()),
+      );
+
+      if (response.statusCode == 200) {
+        log("great success!");
+      } else {
+        log("Error quick adding to budgets");
+      }
+    } catch (e) {
+        throw Exception('Failed to connect to budgets: $e');
+    }
+  }
 }

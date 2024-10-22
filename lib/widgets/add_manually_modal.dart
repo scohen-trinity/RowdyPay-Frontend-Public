@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:receipt_sharing/services/budget_service.dart';
 
 class AddManuallyModal extends StatelessWidget {
   AddManuallyModal({super.key});
   final TextEditingController dollarController = TextEditingController();
   final TextEditingController centsController = TextEditingController();
   static const double controllerSize = 48;
+
+  void addToBudget(int dollars, int cents) {
+    double amt = dollars + (cents / 100);
+    BudgetService().quickAddExpense(1, amt);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,45 +21,58 @@ class AddManuallyModal extends StatelessWidget {
           return SizedBox(
             height: 200,
             child: Center(
-              child: Row(
+              child: Column(
                 children: [
-                  Expanded(
-                    child: TextField(
-                      controller: dollarController,
-                      textAlign: TextAlign.right,
-                      style: const TextStyle(
-                        fontSize: controllerSize,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: dollarController,
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            fontSize: controllerSize,
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: '00',
+                            border: InputBorder.none,
+                          ),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
                       ),
-                      decoration: const InputDecoration(
-                        hintText: '0',
-                        border: InputBorder.none,
+                      const Text(
+                        ".",
+                        style: TextStyle(
+                          fontSize: controllerSize,
+                        ),
                       ),
-                      keyboardType: TextInputType.number,
-                    ),
+                      Expanded(
+                        child: TextField(
+                          controller: centsController,
+                          style: const TextStyle(
+                            fontSize: controllerSize,
+                          ),
+                          decoration: const InputDecoration(
+                            hintText: '00',
+                            border: InputBorder.none,
+                          ),
+                          keyboardType: TextInputType.number,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(2),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const Text(
-                    ".",
-                    style: TextStyle(
-                      fontSize: controllerSize,
-                    ),
-                  ),
-                  Expanded(
-                    child: TextField(
-                      controller: centsController,
-                      style: const TextStyle(
-                        fontSize: controllerSize,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: '00',
-                        border: InputBorder.none,
-                      ),
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(2),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                    ),
-                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      addToBudget(int.parse(dollarController.text), int.parse(centsController.text)); 
+                      Navigator.pop(context); 
+                    },
+                    child: const Text('submit'),),
                 ],
               ),
             ),
