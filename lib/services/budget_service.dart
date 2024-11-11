@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:receipt_sharing/models/budget_model.dart';
 class BudgetService {
-  static const String _apiUrl = 'http://localhost:3000/api';
+  static const String _apiUrl = 'http://localhost:9000/api';
+  static const user_id = 1;
 
   static final BudgetService _instance = BudgetService._internal();
   factory BudgetService() => _instance;
@@ -15,7 +16,8 @@ class BudgetService {
 
   Future<void> getBudgets() async {
     try {
-      final response = await http.get(Uri.parse('$_apiUrl/getBudgets'));
+      final response = await http.get(Uri.parse('$_apiUrl/get_groups/$user_id'));
+      log(response.body.toString());
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);

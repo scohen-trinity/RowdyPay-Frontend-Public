@@ -29,7 +29,7 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    requestStoragePermission();
+    // requestStoragePermission();
   }
 
   void requestStoragePermission() async {

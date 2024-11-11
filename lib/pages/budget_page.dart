@@ -7,17 +7,17 @@ import 'package:receipt_sharing/widgets/rotating_dashed.dart';
 class BudgetPage extends StatefulWidget {
   final String budgetName;
 
-  final List<String> participants;
+  final List<int> participants;
 
   final CameraDescription camera;
 
-  final double balance;
+  // final double balance;
   
   const BudgetPage({ 
     super.key,
     required this.budgetName,
     required this.participants,
-    required this.balance,
+    // required this.balance,
     required this.camera,
   });
 
@@ -54,7 +54,7 @@ class _BudgetPageState extends State<BudgetPage> {
                     ),
                     child: Center(
                       child: Text(
-                        widget.participants[index].substring(0, 1),
+                        widget.participants[index].toString(),
                         style: const TextStyle(
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -82,7 +82,8 @@ class _BudgetPageState extends State<BudgetPage> {
                   ),
                   child: Center(
                     child: Text(
-                      '\$${widget.balance}',
+                      '0.00'.toString(),
+                      // '\$${widget.balance}',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 40,

@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:receipt_sharing/models/budget_model.dart';
+import 'package:receipt_sharing/models/group_model.dart';
 import 'package:receipt_sharing/pages/budget_page.dart';
 import 'package:receipt_sharing/pages/new_budget_page.dart';
 import 'package:receipt_sharing/services/budget_service.dart';
+import 'package:receipt_sharing/services/group_service.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title, required this.camera});
@@ -19,12 +21,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final BudgetService _budgetSvc = BudgetService();
+  final GroupService _groupSvc = GroupService();
 
   @override
   void initState() {
     super.initState();
-    _budgetSvc.getBudgets();
+    _groupSvc.getGroups();
   }
 
   @override
@@ -34,22 +36,21 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ValueListenableBuilder<List<Budget>>(
-            valueListenable: _budgetSvc.budgets,
-            builder: (context, budgetList, _) {
-            log("Triggered");
+      body: ValueListenableBuilder<List<Group>>(
+            valueListenable: _groupSvc.groups,
+            builder: (context, groupList, _) {
             return Center(
             child: ListView.builder(
-              itemCount: budgetList.length,
+              itemCount: groupList.length,
               itemBuilder: (BuildContext context, int index) {
                 return ListTile(
-                  leading: Icon(budgetList[index].icon),
-                  title: Text(budgetList[index].name),
+                  // leading: Icon(groupList[index].icon),
+                  title: Text(groupList[index].gName),
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                        return BudgetPage(budgetName: budgetList[index].name, participants: budgetList[index].participants, camera: widget.camera, balance: budgetList[index].balance);
+                        return BudgetPage(budgetName: groupList[index].gName, participants: groupList[index].participants, camera: widget.camera);
                       }),
                     );
                   },

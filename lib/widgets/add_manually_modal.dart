@@ -1,14 +1,17 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:receipt_sharing/services/budget_service.dart';
 
 class AddManuallyModal extends StatelessWidget {
   AddManuallyModal({super.key});
-  final TextEditingController dollarController = TextEditingController();
-  final TextEditingController centsController = TextEditingController();
+  final TextEditingController dollarController = TextEditingController(text: "00");
+  final TextEditingController centsController = TextEditingController(text: "00");
   static const double controllerSize = 48;
 
-  void addToBudget(int dollars, int cents) {
+  void addToBudget([int dollars = 0, int cents = 0]) {
+    log(cents.toString());
     double amt = dollars + (cents / 100);
     BudgetService().quickAddExpense(1, amt);
   }
