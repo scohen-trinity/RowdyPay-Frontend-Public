@@ -6,20 +6,19 @@ import 'pages/home_page.dart';
 late List<CameraDescription> cameras;
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // WidgetsFlutterBinding.ensureInitialized();
 
   // TODO Need to add in error handling for when a user does not want to add a camera
-  final cameras = await availableCameras();
+  // final cameras = await availableCameras();
 
-  final firstCamera = cameras.first;
+  // final firstCamera = cameras.first;
 
-  runApp(App(camera: firstCamera));
+  runApp(const App());
 }
 
 class App extends StatefulWidget {
-  const App({super.key, required this.camera});
+  const App({super.key});
 
-  final CameraDescription camera;
 
   @override
   State<App> createState() => _AppState();
@@ -66,7 +65,7 @@ class _AppState extends State<App> {
         colorSchemeSeed: const Color(0xff4C3F39),
       ),
       themeMode: ThemeMode.dark,
-      home: HomePage(title: 'Your Budgets', camera: widget.camera),
+      home: const HomePage(title: 'Your Budgets'),
     );
   }
 }

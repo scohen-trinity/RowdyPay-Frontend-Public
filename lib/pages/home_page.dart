@@ -1,13 +1,11 @@
-import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:receipt_sharing/pages/adding_page.dart';
 import 'package:receipt_sharing/pages/groups_page.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key, required this.title, required this.camera});
+  const HomePage({super.key, required this.title});
 
   final String title;
-
-  final CameraDescription camera;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -69,28 +67,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: <Widget>[
         const GroupsPage(),
-        /// Notifications page
-        const Padding(
-          padding: EdgeInsets.all(8.0),
-          child: Column(
-            children: <Widget>[
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 1'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-              Card(
-                child: ListTile(
-                  leading: Icon(Icons.notifications_sharp),
-                  title: Text('Notification 2'),
-                  subtitle: Text('This is a notification'),
-                ),
-              ),
-            ],
-          ),
-        ),
+        const AddingPage(),        
 
         /// Home page
         const Card(
@@ -99,7 +76,7 @@ class _HomePageState extends State<HomePage> {
           child: SizedBox.expand(
             child: Center(
               child: Text(
-                'Home page',
+                'Profile Page (WIP)',
               ),
             ),
           ),
