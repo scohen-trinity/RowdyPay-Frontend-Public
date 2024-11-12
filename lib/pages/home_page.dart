@@ -1,13 +1,6 @@
-import 'dart:developer';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:receipt_sharing/models/budget_model.dart';
-import 'package:receipt_sharing/models/group_model.dart';
-import 'package:receipt_sharing/pages/budget_page.dart';
-import 'package:receipt_sharing/pages/new_budget_page.dart';
-import 'package:receipt_sharing/services/budget_service.dart';
-import 'package:receipt_sharing/services/group_service.dart';
+import 'package:receipt_sharing/pages/groups_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title, required this.camera});
@@ -21,12 +14,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final GroupService _groupSvc = GroupService();
+  int currentPageIndex = 0;
+
+  final List<Widget> navBarList  = [
+      const NavigationDestination(
+        selectedIcon: Icon(Icons.auto_awesome_motion_rounded),
+        icon: Icon(Icons.auto_awesome_motion_outlined),
+        label: 'Groups',
+      ),
+      const NavigationDestination(
+        selectedIcon: Icon(Icons.add_circle_rounded),
+        icon: Icon(Icons.add_circle_outline_rounded),
+        label: 'Add',
+      ),
+      const NavigationDestination(
+        selectedIcon: Icon(Icons.account_circle_rounded),
+        icon: Icon(Icons.account_circle_outlined),
+        label: 'Profile',
+      ),
+  ];
+
+  NavigationDestinationLabelBehavior labelBehavior = NavigationDestinationLabelBehavior.onlyShowSelected;
 
   @override
   void initState() {
     super.initState();
-    _groupSvc.getGroups();
   }
 
   @override
@@ -36,45 +48,63 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: ValueListenableBuilder<List<Group>>(
-            valueListenable: _groupSvc.groups,
-            builder: (context, groupList, _) {
-            return Center(
-            child: ListView.builder(
-              itemCount: groupList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return ListTile(
-                  // leading: Icon(groupList[index].icon),
-                  title: Text(groupList[index].gName),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return BudgetPage(budgetName: groupList[index].gName, participants: groupList[index].participants, camera: widget.camera);
-                      }),
-                    );
-                  },
-                  trailing: const Icon(Icons.more_vert),
-                );
-              }
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          margin: const EdgeInsets.symmetric(horizontal: 24),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(40))
+          ),
+          child: NavigationBar(
+            labelBehavior: labelBehavior,
+            selectedIndex: currentPageIndex,
+            onDestinationSelected: (int index) {
+              setState(() {
+                currentPageIndex = index;
+              });
+            },
+            destinations: navBarList,
+          ),
+        ),
+      ),
+      body: <Widget>[
+        const GroupsPage(),
+        /// Notifications page
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: <Widget>[
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.notifications_sharp),
+                  title: Text('Notification 1'),
+                  subtitle: Text('This is a notification'),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: Icon(Icons.notifications_sharp),
+                  title: Text('Notification 2'),
+                  subtitle: Text('This is a notification'),
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        /// Home page
+        const Card(
+          shadowColor: Colors.transparent,
+          margin: EdgeInsets.all(8.0),
+          child: SizedBox.expand(
+            child: Center(
+              child: Text(
+                'Home page',
+              ),
             ),
-          );
-        }
-      ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        child: Container(height: 50.0),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-            return const NewBudgetPage();
-          }));
-        },
-        tooltip: 'Add a new shared budget',
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+          ),
+        ),
+      ][currentPageIndex],
     );
   }
 }

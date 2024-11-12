@@ -1,6 +1,3 @@
-import 'package:flutter/material.dart';
-import 'package:receipt_sharing/models/icon_mapping.dart';
-
 class Group {
   final int gId;
   final String gName;

@@ -17,7 +17,6 @@ class BudgetService {
   Future<void> getBudgets() async {
     try {
       final response = await http.get(Uri.parse('$_apiUrl/get_groups/$user_id'));
-      log(response.body.toString());
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
