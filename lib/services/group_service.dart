@@ -24,14 +24,14 @@ class GroupService {
         groups.value = jsonResponse.map((data) => Group.fromJson(data)).toList();
       } else {
         log("Error fetching groups");
-        // TODO implement better error handling here
+        // TODO implement error handlingl for when group retrieval fails
       }
     } catch (e) {
       throw Exception('Failed to load groups: $e');
     }
   }
 
-  Future<void> addgroup(String name, List<String> participants, IconData icon) async {
+  Future<void> createGroup(String name, List<String> participants, IconData icon) async {
     GroupDTO payload = GroupDTO(
       name: name,
       participants: participants,

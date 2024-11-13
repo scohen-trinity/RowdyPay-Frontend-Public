@@ -17,9 +17,9 @@ class QuickAddModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
               child: ListTile(
-                leading: Icon(Icons.add),
-                title: Text('Quick Add'),
-                subtitle: Text('Quickly add an amount to a budget'),
+                leading: const Icon(Icons.add),
+                title: const Text('Quick Add'),
+                subtitle: const Text('Quickly add an amount to a budget'),
                 onTap: () {
                   showModalBottomSheet(context: context, builder: (BuildContext context) {
           return SizedBox(

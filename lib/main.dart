@@ -6,19 +6,11 @@ import 'pages/home_page.dart';
 late List<CameraDescription> cameras;
 
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-
-  // TODO Need to add in error handling for when a user does not want to add a camera
-  // final cameras = await availableCameras();
-
-  // final firstCamera = cameras.first;
-
   runApp(const App());
 }
 
 class App extends StatefulWidget {
   const App({super.key});
-
 
   @override
   State<App> createState() => _AppState();
@@ -28,24 +20,6 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
-    // requestStoragePermission();
-  }
-
-  void requestStoragePermission() async {
-    // Check if the platform is not web, as web has no permissions
-    // if (!kIsWeb) {
-    //   // Request storage permission
-    //   var status = await Permission.storage.status;
-    //   if (!status.isGranted) {
-    //     await Permission.storage.request();
-    //   }
-
-    //   // Request camera permission
-    //   var cameraStatus = await Permission.camera.status;
-    //   if (!cameraStatus.isGranted) {
-    //     await Permission.camera.request();
-    //   }
-    // }
   }
 
   // This widget is the root of your application.

@@ -6,7 +6,7 @@ class CameraWidget extends StatefulWidget {
   const CameraWidget({ super.key });
 
   @override
-  _CameraWidgetState createState() => _CameraWidgetState();
+  State<CameraWidget> createState() => _CameraWidgetState();
 }
 
 class _CameraWidgetState extends State<CameraWidget> {
@@ -33,9 +33,9 @@ class _CameraWidgetState extends State<CameraWidget> {
       await _initializeCamera();
     } else {
       // Handle permission denial
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Camera permission denied')),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   const SnackBar(content: Text('Camera permission denied')),
+      // );
     }
   }
 
