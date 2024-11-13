@@ -5,15 +5,29 @@ class IconDropdown extends StatefulWidget {
   const IconDropdown({super.key, this.setIcon});
 
   @override
-  State<IconDropdown> createState() { return _IcondDropdownState(); }
+  State<IconDropdown> createState() {
+    return _IcondDropdownState();
+  }
 }
 
 class _IcondDropdownState extends State<IconDropdown> {
   final List<IconData> icons = [
-    Icons.wallet, Icons.airplane_ticket, Icons.favorite, Icons.home,
-    Icons.person, Icons.map, Icons.camera_alt, Icons.all_inclusive,
-    Icons.anchor, Icons.assignment, Icons.attach_file, Icons.attach_money,
-    Icons.audiotrack_sharp, Icons.auto_awesome, Icons.bakery_dining, Icons.beach_access,
+    Icons.wallet,
+    Icons.airplane_ticket,
+    Icons.favorite,
+    Icons.home,
+    Icons.person,
+    Icons.map,
+    Icons.camera_alt,
+    Icons.all_inclusive,
+    Icons.anchor,
+    Icons.assignment,
+    Icons.attach_file,
+    Icons.attach_money,
+    Icons.audiotrack_sharp,
+    Icons.auto_awesome,
+    Icons.bakery_dining,
+    Icons.beach_access,
   ];
 
   final TextEditingController iconController = TextEditingController();
@@ -30,7 +44,9 @@ class _IcondDropdownState extends State<IconDropdown> {
           child: GridView.count(
             crossAxisCount: 4,
             shrinkWrap: true,
-            children: List.generate(icons.length, (index) {
+            children: List.generate(
+              icons.length,
+              (index) {
                 return IconButton(
                   icon: Icon(icons[index]),
                   onPressed: () {
@@ -54,9 +70,13 @@ class _IcondDropdownState extends State<IconDropdown> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        selectedIcon != null ? Icon(selectedIcon, size: 100) : const Text('No icon selected'),
+        selectedIcon != null
+            ? Icon(selectedIcon, size: 100)
+            : const Text('No icon selected'),
         const SizedBox(height: 20),
-        ElevatedButton(onPressed: _openIconGrid, child: const Text('Select an icon'),
+        ElevatedButton(
+          onPressed: _openIconGrid,
+          child: const Text('Select an icon'),
         ),
       ],
     );

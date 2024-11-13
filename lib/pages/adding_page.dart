@@ -17,15 +17,16 @@ class AddingPage extends StatelessWidget {
               child: ListTile(
                 leading: const Icon(Icons.add_a_photo_rounded),
                 title: const Text('Scan a receipt'),
-                subtitle: const Text('Quickly scan a receipt and add to a group'),
+                subtitle:
+                    const Text('Quickly scan a receipt and add to a group'),
                 onTap: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return const CameraWidget();
-                  }),
-                );
-              },
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (BuildContext context) {
+                      return const CameraWidget();
+                    }),
+                  );
+                },
               ),
             ),
           ],

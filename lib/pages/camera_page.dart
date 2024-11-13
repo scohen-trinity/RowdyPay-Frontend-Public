@@ -3,7 +3,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:camera/camera.dart';
 
 class CameraWidget extends StatefulWidget {
-  const CameraWidget({ super.key });
+  const CameraWidget({super.key});
 
   @override
   State<CameraWidget> createState() => _CameraWidgetState();

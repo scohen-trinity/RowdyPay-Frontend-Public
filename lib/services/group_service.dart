@@ -21,7 +21,8 @@ class GroupService {
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = jsonDecode(response.body);
-        groups.value = jsonResponse.map((data) => Group.fromJson(data)).toList();
+        groups.value =
+            jsonResponse.map((data) => Group.fromJson(data)).toList();
       } else {
         log("Error fetching groups");
         // TODO implement error handlingl for when group retrieval fails
@@ -31,12 +32,10 @@ class GroupService {
     }
   }
 
-  Future<void> createGroup(String name, List<String> participants, IconData icon) async {
-    GroupDTO payload = GroupDTO(
-      name: name,
-      participants: participants,
-      icon: icon.codePoint
-    );
+  Future<void> createGroup(
+      String name, List<String> participants, IconData icon) async {
+    GroupDTO payload =
+        GroupDTO(name: name, participants: participants, icon: icon.codePoint);
 
     try {
       final response = await http.post(
